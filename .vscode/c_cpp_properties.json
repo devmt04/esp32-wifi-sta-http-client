@@ -1,23 +1,31 @@
 {
-  "configurations": [
-    {
-      "name": "ESP-IDF",
-      "compilerPath": "${config:idf.toolsPath}/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/bin/xtensa-esp32-elf-gcc",
-      "compileCommands": "${config:idf.buildPath}/compile_commands.json",
-      "includePath": [
-        "${config:idf.espIdfPath}/components/**",
-        "${config:idf.espIdfPathWin}/components/**",
-        "${workspaceFolder}/**"
-      ],
-      "browse": {
-        "path": [
-          "${config:idf.espIdfPath}/components",
-          "${config:idf.espIdfPathWin}/components",
-          "${workspaceFolder}"
-        ],
-        "limitSymbolsToIncludedHeaders": true
-      }
-    }
-  ],
-  "version": 4
+    "configurations": [
+        {
+            "name": "ESP-IDF",
+            "compilerPath": "/home/mohit/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/bin/xtensa-esp32-elf-gcc",
+            "compileCommands": [
+                "/home/mohit/Desktop/mohit/Projects/embedded/CC/LPU/ClassPlate/build/compile_commands.json"
+            ],
+            "includePath": [
+                "/home/mohit/esp/esp-idf/components/**",
+                "${env:IDF_PATH}/components/**",
+                "/home/mohit/Desktop/mohit/Projects/embedded/CC/LPU/ClassPlate/**"
+            ],
+            "browse": {
+                "path": [
+                    "/home/mohit/esp/esp-idf/components",
+                    "${env:IDF_PATH}/components",
+                    "/home/mohit/Desktop/mohit/Projects/embedded/CC/LPU/ClassPlate"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerPathInCppPropertiesJson": "${config:idf.toolsPath}/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/bin/xtensa-esp32-elf-gcc",
+            "compileCommandsInCppPropertiesJson": [
+                "${config:idf.buildPath}/compile_commands.json"
+            ],
+            "mergeConfigurations": false,
+            "recursiveIncludes": {}
+        }
+    ],
+    "version": 4
 }

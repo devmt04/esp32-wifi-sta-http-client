@@ -11,7 +11,7 @@
 
 #define MAX_HTTP_RECV_BUFFER 512
 #define MAX_HTTP_OUTPUT_BUFFER 2048
-
+#define TAG "HTTP_CLIENT"
 
 esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 {
@@ -22,6 +22,7 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
             ESP_LOGD(TAG, "HTTP_EVENT_ERROR");
             break;
         case HTTP_EVENT_ON_CONNECTED:
+            output_len = 0;  
             ESP_LOGD(TAG, "HTTP_EVENT_ON_CONNECTED");
             break;
         case HTTP_EVENT_HEADER_SENT:
@@ -116,13 +117,13 @@ void http_get_class_info(){
     // To be implemented
 }
 
-static void http_rest_task(void *pvParameters){    
+static char *http_rest_task(void *pvParameters){    
     char local_response_buffer[MAX_HTTP_OUTPUT_BUFFER + 1] = {0};
     esp_http_client_config_t config = {
         // .host = CONFIG_EXAMPLE_HTTP_ENDPOINT,
         // .path = "/get",
         // .query = "esp",
-        .url = "http://jsonplaceholder.typicode.com/posts/1",
+        .url = "http://random-word-api.herokuapp.com/word?number=1&length=4",
         .event_handler = _http_event_handler,
         .user_data = local_response_buffer,   // Pass address of local buffer to get response
                                               // or pass the global buffer pointer
@@ -147,29 +148,88 @@ static void http_rest_task(void *pvParameters){
     ESP_LOG_BUFFER_HEX(TAG, local_response_buffer, strlen(local_response_buffer));
 
 
-
-
+    // Parse JSON: expected format is ["abcd"]
     cJSON *root = cJSON_Parse(local_response_buffer);
-   if (!root) {
+    if (!root) {
+        ESP_LOGE(TAG, "JSON Parse Error! Raw response: %s", local_response_buffer);
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    if (!cJSON_IsArray(root)) {
+        ESP_LOGE(TAG, "JSON is not an array");
+        cJSON_Delete(root);
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    cJSON *item = cJSON_GetArrayItem(root, 0);
+    if (!item || !cJSON_IsString(item) || item->valuestring == NULL) {
+        ESP_LOGE(TAG, "JSON array[0] is not a valid string");
+        cJSON_Delete(root);
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    const char *word = item->valuestring;
+    ESP_LOGI(TAG, "Parsed word: %s", word);
+
+    // Make sure it is at least 1 char; we'll copy up to 4
+    size_t word_len = strlen(word);
+    if (word_len == 0) {
+        ESP_LOGE(TAG, "Empty word received");
+        cJSON_Delete(root);
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    // Allocate 5 bytes: 4 chars + '\0'
+    char *d = (char *)malloc(5);
+    if (!d) {
+        ESP_LOGE(TAG, "Failed to allocate memory for word copy");
+        cJSON_Delete(root);
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    // Copy up to 4 characters and null-terminate
+    // If word is shorter, remaining bytes stay as they were (we'll clear them)
+    memset(d, 0, 5);
+    strncpy(d, word, 4);  // strncpy will stop at '\0' if word < 4 chars
+    d[4] = '\0';          // ensure termination
+
+    // Now it's safe to free the JSON tree and client
+    cJSON_Delete(root);
+    esp_http_client_cleanup(client);
+
+    return d;  // caller must free(d)
+
+    /*
+    cJSON *root = cJSON_Parse(local_response_buffer);
+    if (!root) {
         printf("JSON Parse Error! Raw response: %s\n", local_response_buffer);
         esp_http_client_cleanup(client);
-        vTaskDelete(NULL);
-        return;
+        // vTaskDelete(NULL);
+        // return;
     }
-    cJSON *origin = cJSON_GetObjectItem(root, "title");
+    cJSON *origin = cJSON_GetObjectItem(root, "0");
 
     if (cJSON_IsString(origin))
-        printf("title: %s\n", origin->valuestring);
+        printf("data: %s\n", origin->valuestring);
 
     cJSON_Delete(root);
     esp_http_client_cleanup(client);
-    vTaskDelete(NULL);
+    char *d = (char *)malloc(5 * sizeof(char));
+    memcpy(d, origin->valuestring, 4);
+    return d;
+    */
+    // vTaskDelete(NULL);
 }
 
-
-esp_err_t init_http_client(void){
-    xTaskCreate(&http_rest_task, "http_rest_task", 8192, NULL, 5, NULL);
-    return ESP_OK;
+char *init_http_client(void){
+    // xTaskCreate(&http_rest_task, "http_rest_task", 8192, NULL, 5, NULL);
+    return http_rest_task(NULL);
+    // return ESP_OK;
 }
 
 

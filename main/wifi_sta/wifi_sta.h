@@ -3,8 +3,6 @@
 
 // https://github.com/espressif/esp-idf/blob/v5.5.1/examples/wifi/getting_started/station/main/station_example_main.c
 
-#define TAG "WIFI_STA"
-
 // #define WIFI_SSID      "LPU Hostels"
 // #define WIFI_PASS      "123456789a"
 

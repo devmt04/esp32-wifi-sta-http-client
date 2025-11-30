@@ -17,6 +17,7 @@ static EventGroupHandle_t s_wifi_event_group;
  * - we failed to connect after the maximum amount of retries */
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT      BIT1
+#define TAG "WIFI_STA"
 
 static int s_retry_num = 0;
 
