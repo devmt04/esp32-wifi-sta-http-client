@@ -122,7 +122,7 @@ int http_get_weather(void){
 
     esp_http_client_handle_t client = esp_http_client_init(&config);
 
-    esp_http_client_set_header(client, "x-api-key", "sk-live-7OgGLEboyGmsEqzppGiNFyyF2pLmzgU9636OGTH5");
+    esp_http_client_set_header(client, "x-api-key", "");
 
     // GET
     esp_err_t err = esp_http_client_perform(client);

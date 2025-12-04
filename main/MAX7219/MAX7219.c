@@ -15,6 +15,328 @@
 
 spi_device_handle_t spi;
 
+const string_font6x5_t string_font6x5[] = {
+    // [0] = 'A'
+    [0] = {{
+        0b01111100,
+        0b00010010,
+        0b00010010,
+        0b00010010,
+        0b01111100,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [1] = 'B'
+    [1] = {{
+        0b01111110,
+        0b01001010,
+        0b01001010,
+        0b01011010,
+        0b00110100,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [2] = 'C'
+    [2] = {{
+        0b00111100,
+        0b01000010,
+        0b01000010,
+        0b01000010,
+        0b00100100,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [3] = 'D'
+    [3] = {{
+        0b01111110,
+        0b01000010,
+        0b01000010,
+        0b01000010,
+        0b00111100,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [4] = 'E'
+    [4] = {{
+        0b01111110,
+        0b01001010,
+        0b01001010,
+        0b01001010,
+        0b01000010,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [5] = 'F'
+    [5] = {{
+        0b01111110,
+        0b00001010,
+        0b00001010,
+        0b00001010,
+        0b00000010,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [6] = 'G'
+    [6] = {{
+        0b00111100,
+        0b01000010,
+        0b01000010,
+        0b01001000,
+        0b01111000,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [7] = 'H'
+    [7] = {{
+        0b01111110,
+        0b00001000,
+        0b00001000,
+        0b00001000,
+        0b01111110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [8] = 'I'
+    [8] = {{
+        0b01000010,
+        0b01000010,
+        0b01111110,
+        0b01000010,
+        0b01000010,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [9] = 'J'
+    [9] = {{
+        0b00110000,
+        0b01000000,
+        0b01000010,
+        0b01000010,
+        0b00111110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [10] = 'K'
+    [10] = {{
+        0b01111110,
+        0b00001000,
+        0b00010100,
+        0b00100010,
+        0b01100010,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [11] = 'L'
+    [11] = {{
+        0b01111110,
+        0b01000000,
+        0b01000000,
+        0b01000000,
+        0b01000000,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [12] = 'M'
+    [12] = {{
+        0b01111110,
+        0b00000100,
+        0b00001000,
+        0b00000100,
+        0b01111110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [13] = 'N'
+    [13] = {{
+        0b01111110,
+        0b00000100,
+        0b00001000,
+        0b00010000,
+        0b01111110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [14] = 'O'
+    [14] = {{
+        0b00111100,
+        0b01000010,
+        0b01000010,
+        0b01000010,
+        0b00111100,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [15] = 'P'
+    [15] = {{
+        0b01111110,
+        0b00010010,
+        0b00010010,
+        0b00010010,
+        0b00001100,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [16] = 'Q'
+    [16] = {{
+        0b00111100,
+        0b01000010,
+        0b01000010,
+        0b01100010,
+        0b10111100,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [17] = 'R'
+    [17] = {{
+        0b01111110,
+        0b00010010,
+        0b00010010,
+        0b00110010,
+        0b01001100,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [18] = 'S'
+    [18] = {{
+        0b00100100,
+        0b01001010,
+        0b01001010,
+        0b01001010,
+        0b00110000,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [19] = 'T'
+    [19] = {{
+        0b00000010,
+        0b00000010,
+        0b01111110,
+        0b00000010,
+        0b00000010,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [20] = 'U'
+    [20] = {{
+        0b00111110,
+        0b01000000,
+        0b01000000,
+        0b01000000,
+        0b00111110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [21] = 'V'
+    [21] = {{
+        0b00001110,
+        0b00110000,
+        0b01000000,
+        0b00110000,
+        0b00001110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [22] = 'W'
+    [22] = {{
+        0b00111110,
+        0b01000000,
+        0b00111000,
+        0b01000000,
+        0b00111110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [23] = 'X'
+    [23] = {{
+        0b01100110,
+        0b00011000,
+        0b00011000,
+        0b00011000,
+        0b01100110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [24] = 'Y'
+    [24] = {{
+        0b00000110,
+        0b00001000,
+        0b01110000,
+        0b00001000,
+        0b00000110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [25] = 'Z'
+    [25] = {{
+        0b01100010,
+        0b01010010,
+        0b01001010,
+        0b01000110,
+        0b01000110,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [26] = ' ' (space)
+    [26] = {{
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [27] = '!'
+    [27] = {{
+        0b00000000,
+        0b01011110,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }},
+    // [28] = '.'
+    [28] = {{
+        0b00000000,
+        0b01100000,
+        0b01100000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000,
+        0b00000000
+    }}
+};
+
 // init CS pin
 static esp_err_t init_cs(){
     gpio_config_t io_conf = {
@@ -85,33 +407,23 @@ static void max7219_basic_init()
     max7219_send_all(0x0F, 0x00);  // Test mode OFF
 }
 
+void max7219_set_brightness(uint8_t module, uint8_t intensity) {
+    // intensity: 0x00 (min) to 0x0F (max)
+    if (intensity > 0x0F) intensity = 0x0F;  // Clamp to max
+    max7219_send(module, 0x0A, intensity);
+}
+
+void set_all_brightness(uint8_t intensity) {
+    for (int module = 0; module < 8; module++){
+        max7219_set_brightness(module, intensity);
+    }
+}
+
 void drawChar_8x8(int module, char c){
     for (int i = 0; i < sizeof(font8x8)/sizeof(font8x8[0]); i++) {
         if (font8x8[i].c == c) {
             for (int row = 0; row < 8; row++) {
                 max7219_send(module, row+1, font8x8[i].rows[row]);
-            }
-            return;
-        }
-    }
-}
-
-void drawChar_4x4(int module, char c, int quadrant){
-    int offset_row = (quadrant > 1) ? 4 : 0;
-    int offset_col = (quadrant % 2) ? 4 : 0;
-
-    for (int i = 0; i < sizeof(font4x4)/sizeof(font4x4[0]); i++) {
-        if (font4x4[i].c == c) {
-
-            for (int r = 0; r < 4; r++) {
-
-                uint8_t rowdata = (font4x4[i].rows[r] & 0x0F);
-
-                // Shift into correct 4×4 quadrant
-                rowdata <<= (4 - offset_col);
-
-                // Read existing row (not stored — overwrite fully)
-                max7219_send(module, offset_row + r + 1, rowdata);
             }
             return;
         }
@@ -124,13 +436,9 @@ void drawClear(int module){
     }
 }
 
-void drawClear_4x4(int module, int quadrant){
-    int offset_row = (quadrant > 1) ? 4 : 0;
-    int offset_col = (quadrant % 2) ? 4 : 0;
-
-    for (int r = 0; r < 4; r++) {
-        // Read existing row (not stored — overwrite fully)
-        max7219_send(module, offset_row + r + 1, 0x00);
+void drawClear_range(int from, int to){
+    for(int i = from; i< to+1; i++){
+        drawClear(i);
     }
 }
 
@@ -140,99 +448,22 @@ void drawClear_all(){
     }
 }
 
-void drawString_8x8(const char* str){
-    char buffer[128];
-    strncpy(buffer, str, sizeof(buffer));
-    
-    drawClear_all();
-    int len = strlen(buffer);
-    if(len <= 4){
-        for (int i = 0; i < len; i++){
-            drawChar_8x8(i, buffer[i]);
-        }
-    }else {
-        // Animate it
-    }
-}
-
-void drawString_4x4(const char* str){
-    char buffer[128];
-    strncpy(buffer, str, sizeof(buffer));
-    
-    drawClear_all();
-    int len = strlen(buffer);
-    if(len <= 16){
-        for(int i = 0; i<len; i++){
-            int module = i / 4;
-            int quadrant = i % 4;
-            drawChar_4x4(module, buffer[i], quadrant);
-        }
-    }else {
-        // Animate it
-    }
-}
-
 void drawPattern_8x8(int module, uint8_t pattern[8]){
     for (int row = 0; row < 8; row++) {
         max7219_send(module, row + 1, pattern[row]);
     }
 }
 
-void drawCustom(){
 
-}
-
-static void test_pattern(char *d)
-{
-    uint8_t pattern[8] = {
-        0b00100010,
-        0b00100010,
-        0b00111110,
-        0b00000010,
-        0b00000010,
-        0b00000010,
-        0b00000010,
-        0b00000000
-    };
-
-    // drawClear_all();
-    // drawChar_4x4(0, 'L', 0);
- 
-    // drawString_4x4("LOVE IS LIFE");
-    drawString_8x8(d);
-    // drawChar_8x8(1, 'V');
-
-    // uint8_t pattern[8] = font8x8[0].rows;
-
-    // for (int row = 0; row < 8; row++) {
-        // max7219_send_all(row + 1, pattern[row]);
-        // max7219_send_all(row + 1, font8x8['M' - 'A'].rows[row]);
-        // max7219_send(2, row + 1, font8x8['M' - 'A'].rows[row]);
-    // }
-}
-
-
-void test_draw(char *str){
-    // test_pattern(d);
-    // drawString_8x8(d);
-
-    char buffer[128];
-    strncpy(buffer, str, sizeof(buffer));
-    
-    drawClear_all();
-    int len = strlen(buffer);
-    drawChar_8x8(0, 'A');
-    drawChar_8x8(1, 'P');
-    drawChar_8x8(2, 'I');
-    drawChar_8x8(3, ':');
-    if(len <= 4){
-        for (int i = 0; i < len; i++){
-            drawChar_8x8(i+4, buffer[i]);
+void draw_buffer(uint8_t buf[32]) {
+    for (int module = 4; module < 8; module++) {
+        int start = (module - 4) * 8;
+        for (int row = 0; row < 8; row++) {
+            max7219_send(module, row+1, buf[start+row]);
         }
     }
-    
-    // drawChar_4x4(0, 'L', 0);
 }
+
 
 static void draw_time(int hr0, int hr1, int min0, int min1){
     uint8_t min_pattern[8] = {
@@ -316,19 +547,27 @@ static void draw_temp(int temp){
 }
 
 void draw_time_weather(int temp, int hr, int min){
-    drawClear_all();
+    drawClear_range(0, 3);
     int hr_tens = hr / 10;
     int hr_ones = hr % 10;
     int min_tens = min / 10;
     int min_ones = min % 10;
     draw_time(hr_tens, hr_ones, min_tens, min_ones);
     draw_temp(temp);
+}
 
-    // draw MSG for Demo purposes
-
-    drawChar_8x8(4, 'M');
-    drawChar_8x8(5, 'S');
-    drawChar_8x8(6, 'G');
+void draw_init(void){
+    for (int row = 0; row < 8; row++) {
+        max7219_send(0, row + 1, font8x8['L' - 'A'].rows[row]);
+        max7219_send(1, row + 1, font8x8['P' - 'A'].rows[row]);
+        max7219_send(2, row + 1, font8x8['U' - 'A'].rows[row]);
+        drawClear(3);
+        
+        max7219_send(4, row + 1, font8x8['I' - 'A'].rows[row]);
+        max7219_send(5, row + 1, font8x8['N' - 'A'].rows[row]);
+        max7219_send(6, row + 1, font8x8['I' - 'A'].rows[row]);
+        max7219_send(7, row + 1, font8x8['I' - 'A'].rows[row]);
+    }
 }
 
 esp_err_t init_spi(){
@@ -363,10 +602,8 @@ esp_err_t init_spi(){
     };
 
     ESP_ERROR_CHECK(spi_bus_add_device(SPI2_HOST, &dev_config, &spi));
-    
     max7219_basic_init();
-    // test_pattern(d);
-
+    
     return ESP_OK;
 }
 
