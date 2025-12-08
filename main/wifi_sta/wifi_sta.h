@@ -3,10 +3,7 @@
 
 // https://github.com/espressif/esp-idf/blob/v5.5.1/examples/wifi/getting_started/station/main/station_example_main.c
 
-// #define WIFI_SSID      "LPU Hostels"
-// #define WIFI_PASS      "123456789a"
-
-#define WIFI_SSID      "Mohit" // iPhone Hotspot
+#define WIFI_SSID      "Mohit"
 #define WIFI_PASS      "12345678"
 
 #define WIFI_MAXIMUM_RETRY 0 // 0 for infinite retries
